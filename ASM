@@ -1,3 +1,5 @@
+// x² − 2xy − y²
+
 x: .word 50
 y: .word 50
 
