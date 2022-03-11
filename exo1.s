@@ -3,7 +3,7 @@
 x: .word 50
 y: .word 50
 
-fact:
+calcul:
     ld [%sp+1], %a  //%a = x
     push %b         //save %B
     mul %a,%a       //x²
@@ -28,13 +28,13 @@ fact:
     pop %b          //remet le registre a
     rtn
 
-main:
+main_calcul:
     ld [x], %a
     ld [y], %b
     push %b
     push %a
     debugreg
-    call fact
+    call calcul
     debugreg
     reset
     
@@ -85,7 +85,7 @@ produit:
     debugreg
     jmp retour
 
-main:
+main_prodscal:
     
     //vecteur vb
     ld vax,%a
@@ -103,3 +103,9 @@ main:
     //depiler tout le bordell
     reset
     
+
+
+racine:
+    reset
+main_racine:
+    reset
