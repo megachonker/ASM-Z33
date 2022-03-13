@@ -40,7 +40,6 @@ main_calcul:
     
 
 // produit scalair
-
 vax: .word 9
 vay: .word 8
 vac: .word 7
@@ -49,17 +48,19 @@ vby: .word 2
 vbc: .word 3
 
 prodscal:
+    push %b
     push 0  // P contien le resulstat
     ld 0,%b //init le compteur
 loop:
     jmp produit
     retour:
     add 1,%b // incrémente le conteur
-    ld [%sp+2],%a
+    ld [%sp+5],%a
     cmp %b,%a
     debugreg
     jne loop    // }
     pop %a
+    pop %b
     rtn
 
 produit:
@@ -68,7 +69,6 @@ produit:
     add %b,%a       //on shiff l'adresse de l'incice
     ld [%a],%a      //charge vecteur b
     push %a         //save le vecteur charger
-
     //on part du principe que les vecteur ne sont pas coller
     ld  [%sp+5],%a  //on charge l'adresse du va du staque
     add %b,%a       //on shiff l'adresse de l'incice
@@ -87,6 +87,11 @@ produit:
 
 main_prodscal:
     
+    ld 69,%b
+    //n taille vecteur
+    push 3  
+
+
     //vecteur vb
     ld vax,%a
     push %a
@@ -94,12 +99,10 @@ main_prodscal:
     //vecteur va
     ld vbx,%a
     push %a
-    
-    //n taille vecteur
-    push 3  
 
     call prodscal
     debugreg
+
     //depiler tout le bordell
     reset
     
